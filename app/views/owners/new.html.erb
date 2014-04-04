@@ -1,0 +1,8 @@
+<h1>Record a new owner</h1>
+
+<%= simple_form_for(@owner) do |f| %>
+  <%= f.input :first_name, label: 'First Name' %>
+  <%= f.input :last_name, label: 'Last Name' %>
+  <%= f.input :company %>
+  <%= f.button :submit, value: 'register' %>
+<% end %>
