@@ -19,13 +19,14 @@ feature 'register a real estate building', %Q{
   scenario 'register a building' do
     prev_count = Building.count
 
-    visit '/buildings/new'
+    visit new_owner_building_path #'/buildings/new'
 
     fill_in 'Street Address', with: '1600 Pennsylvania Avenue'
     fill_in 'City', with: 'Washington'
     fill_in 'State', with: 'DC'
     fill_in 'Zipcode', with: '20500'
     fill_in 'Description', with: "a big white building where Obama sometimes stays. Another famous resident was Barney, George W's Scottish Terrier."
+    fill_in 'Owner', with: 'Lydia'
 
     click_button 'register'
     expect(page).to have_content('Building recorded.')
@@ -34,7 +35,7 @@ feature 'register a real estate building', %Q{
 
   scenario 'create invalid building registration' do
     prev_count = Building.count
-    visit '/buildings/new'
+    visit new_owner_building_path #'/buildings/new'
     fill_in 'State', with: 'CwjsjksljD'
     click_button 'register'
     expect(page).to have_content("can't be blank")

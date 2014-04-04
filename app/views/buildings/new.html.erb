@@ -1,10 +1,11 @@
 <h1>Record a new building</h1>
 
-<%= simple_form_for(@building) do |f| %>
+<%= simple_form_for[@owner, @building] do |f| %>
   <%= f.input :street_address, label: 'Street Address' %>
   <%= f.input :city %>
   <%= f.input :state %>
   <%= f.input :zipcode %>
   <%= f.input :description %>
+  <%= f.association :owner, include_blank: false %>
   <%= f.button :submit, value: 'register' %>
 <% end %>
