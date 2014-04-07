@@ -15,7 +15,7 @@ feature 'register an owner of a building', %Q{
   scenario 'register an owner' do
     prev_count = Owner.count
 
-    visit '/owners/new'
+    visit new_owner_path
 
     fill_in 'First Name', with: 'Lydia'
     fill_in 'Last Name', with: 'Ho'
@@ -23,11 +23,12 @@ feature 'register an owner of a building', %Q{
 
     click_button 'register'
     expect(page).to have_content('Owner recorded')
+    expect(Owner.count).to eq(prev_count + 1)
   end
 
     scenario 'create invalid owner registration' do
       prev_count = Owner.count
-      visit '/owners/new'
+      visit new_owner_path
 
       click_button 'register'
       expect(page).to have_content("can't be blank")

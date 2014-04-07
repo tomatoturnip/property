@@ -16,24 +16,27 @@ feature 'register a real estate building', %Q{
 # * If I do not specify all of the required information in the required formats, the building is not recorded and I am presented with errors
 # * Upon successfully creating a building, I am redirected so that I can record another building.
 
-  scenario 'register a building' do
+  scenario 'register a building with an owner' do
     prev_count = Building.count
+    owner = Owner.create!(first_name: 'Lydia', last_name: 'Ho')
 
-    visit new_owner_building_path
+    visit new_building_path
 
     fill_in 'Street Address', with: '1600 Pennsylvania Avenue'
     fill_in 'City', with: 'Washington'
     fill_in 'State', with: 'DC'
     fill_in 'Zipcode', with: '20500'
     fill_in 'Description', with: "a big white building where Obama sometimes stays. Another famous resident was Barney, George W's Scottish Terrier."
-    fill_in 'Owner', with: 'Lydia'
+    select 'Lydia Ho', from: 'Owner'
 
     click_button 'register'
+
     expect(page).to have_content('Building recorded.')
     expect(Building.count).to eq(prev_count + 1)
+    expect(Building.first.owner).to eq(owner)
   end
 
-  scenario 'create invalid building registration' do
+  pending 'create invalid building registration' do
     prev_count = Building.count
     visit new_owner_building_path
     fill_in 'State', with: 'CwjsjksljD'
