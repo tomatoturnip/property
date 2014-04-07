@@ -1,0 +1,13 @@
+<h1>Buildings</h1>
+
+<% if @buildings.present? %>
+  <ul>
+  <% @buildings.each do |building| %>
+    <li><%= building.street_address %></li>
+    <li><%= building.city %></li>
+    <li><%= building.state %></li>
+    <li><%= building.zipcode %></li>
+    <li><%= building.description %></li>
+    <% end %>
+  </ul>
+<% end %>
